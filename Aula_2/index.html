@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table, th, td
+        {
+            border: 2px solid tomato;
+            border-collapse: collapse;
+        }
+        table
+        {
+           /* border-spacing: 5px; */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="border: 2px solid tomato;"> Borda vermelha</h1>
+    <h1 style="background-color: rgba(255, 1, 1, 0.438);"> background vermelha</h1>
+
+    <table>
+        <tr>
+            <th>Codigo</th>
+            <th>Nome</th>
+            <th>Idade</th>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Fernando</td>
+            <td>34</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center;">Info cliente</td>
+        </tr>
+    </table>
+    <br>
+
+    <table>
+        <caption>Informacao de filhos</caption>
+        <tr>
+            <th>Funcionarios:</th>
+            <td>Thiaog</td>
+        </tr>
+        <tr>
+            <th rowspan="4">Nomes filhos</th>
+            <td>Alberto</td>
+        </tr>
+        <tr>
+            <td>Bianca</td>
+        </tr>
+        <tr>
+            <td>camila</td>
+        </tr>
+        <tr>
+            <td>daniel</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <table>
+        <tr>
+            <td>A</td>
+            <td>B</td>
+            <td>C</td>
+        </tr>
+        <tr>
+            <td>D</td>
+        <td rowspan="2">E</td>
+        <td>F</td>
+        </tr>
+        <tr>
+            <td>G</td>
+            <td>H</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center;">i</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <style>
+        table, th, td
+        {
+            border: 2px solid rgb(0, 0, 0);
+            border-collapse: collapse;
+        }
+    </style>
+    
+    <form action="/action_page.php">
+        <label for="forme">nome:</label>
+        <input type="text" id="fname" name="fname" value=""><br><br>
+
+        <table>
+            <tr>
+                <th colspan="3" style="text-align: center;">Escolaridade</th>
+            </tr>
+            <tr>
+                <td><input type="radio" id="MedioIn" name="Ensino" value="MedioIn"></td>
+                <td>Ensino medio incompleto</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="MedioCom" name="Ensino" value="MedioCom"></td>
+                <td>Ensino medio completo</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="GraduacaoIn" name="Ensino" value="GraduacaoIn"></td>
+                <td>Graduacao incompleto</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="Graduacao" name="Ensino" value="Graduacao"></td>
+                <td>Ensino medio incompleto</td>
+            </tr>
+
+        </table>
+    
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="bike">
+        <label for="vehicle1">I have a bike</label><br>
+        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+        <label for="vehicle2">I have a Car</label><br>
+        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+        <label for="vehicle3">I have a Boat</label><br><br>
+        <input type="submit" value="submit">
+    </form>
+</body>
+</html>
