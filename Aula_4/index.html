@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <form>
+        <label for="username">Usarname:</label>
+        <input type="text" id="usarname" name="usarname"><br>
+        <label for="pwd">Password:</label>
+        <input type="password" id="pwd" name="pwd"><br>
+        <input type="submit" value="submit"><br><br>
+
+        <input type="reset"> <br><br>
+
+        <input type="button" onclick="alert('Hello World!')" value="Click me!"><br><br>
+
+        <label for="favcolor">select your favorite color:</label>
+        <input type="color" id="favcolor" name="favcolor" value="#ff0000"> <br><br>
+
+        <label for="birthaday">Birthaday</label>
+        <input type="date" id="birthaday" name="birthaday"><br><br>
+
+        <label for="datemax">entrer a date before 1980-01-01</label>
+        <input type="date" id="datemax" name="datemax" max="1980-01-01"> <br><br>
+
+        <label for="datemin">entrer a date afiter 2000-01-01</label>
+        <input type="date" id="datemin" min="2000-01-01"><br><br>
+
+        <label for="birthadaytime">Birthadaytime</label>
+        <input type="datetime-local" id="birthadaytime" name="birthadaytime"><br><br>
+
+        <label for="email">entrer your email:</label>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="myflile">select a file:</label>
+        <input type="file" id="myflile" name="myflile"><br><br>
+
+        <label for="bdaymonth">Birthaday</label>
+        <input type="month" id="bdaymonth" name="bdaymonth"><br><br>
+
+        <label for="quantity">quantity(between 1 and 5):</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="5"><br><br>
+
+        <label for="vol">valume (between 0 and 50):</label>
+        <input type="range" id="vol" name="vol" min="0" max="50"><br><br>
+
+        <label for="gsearch">Search Google:</label>
+        <input type="search" id="gsearch" name="gsearch"><br><br>
+
+        <label for="phone"> entrer your phone number:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="xx xxxx-xxxx"><br>
+
+        <label for="phone"> entrer your phone number:</label>
+        <input type="tel" id="phone" name="phone" pattern="\(\d{2}\) {4}-\{4}" placeholder="(xx) xxxx-xxxx">
+    </form>
+</body>
+</html>
