@@ -1,0 +1,158 @@
+/* Estilização geral da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Adicionando a direção da coluna */
+    justify-content: flex-start; /* Alinhamento superior */
+    align-items: center; /* Alinha o conteúdo ao centro */
+    min-height: 100vh; /* Garantir que o conteúdo ocupe o mínimo da tela */
+    text-align: center;
+}
+
+/* Estilo do título */
+h1 {
+    color: #333;
+    margin-top: 20px; /* Ajustando a margem superior */
+    font-size: 2em;
+    margin-bottom: 20px; /* Adicionando espaço abaixo do título */
+}
+
+/* Estilo para o formulário */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    margin-top: 20px; /* Adicionando espaçamento entre o título e o formulário */
+}
+
+/* Estilo para as perguntas */
+p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Labels de alternativas */
+label {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Estilo para as alternativas de radio e checkbox */
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Estilo para o campo de texto */
+input[type="text"] {
+    width: 98%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Estilo para os campos de seleção */
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Estilo das perguntas numeradas */
+p[id^="pergunta"] {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Estilo para os botões de envio */
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para a lista de navegação */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 5px; /* Espaçamento entre o título e a lista */
+}
+
+/* Estilo para os itens da lista */
+ul li {
+    margin: 35px 0;
+}
+
+/* Estilo para os links */
+a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 2px solid #4CAF50;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Efeito de hover nos links */
+a:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Efeito de foco nos links */
+a:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(72, 184, 72, 0.5);
+}
+
+/* Estilo para o botão de envio */
+#btn {
+    padding: 12px 24px;  /* Espaçamento interno */
+    background-color: #4CAF50;  /* Cor de fundo verde */
+    color: white;  /* Cor do texto */
+    border: none;  /* Remover borda */
+    border-radius: 5px;  /* Bordas arredondadas */
+    font-size: 16px;  /* Tamanho da fonte */
+    cursor: pointer;  /* Cursor de clique */
+    transition: background-color 0.3s, transform 0.2s;  /* Efeito suave para a cor e animação ao clicar */
+    width: 100%;  /* Faz o botão ocupar toda a largura disponível */
+    max-width: 200px;  /* Define uma largura máxima para o botão */
+    margin-top: 20px;  /* Espaçamento superior */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra sutil para profundidade */
+}
+
+/* Efeito de hover */
+#btn:hover {
+    background-color: #45a049;  /* Cor mais escura quando o mouse passa por cima */
+    transform: translateY(-2px);  /* Eleva o botão um pouco ao passar o mouse */
+}
+
+/* Efeito de foco (quando o botão é clicado ou selecionado) */
+#btn:focus {
+    outline: none;  /* Remove o contorno padrão */
+    box-shadow: 0 0 10px rgba(72, 184, 72, 0.8);  /* Efeito de foco com sombra */
+}
