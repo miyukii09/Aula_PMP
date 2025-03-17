@@ -1,0 +1,55 @@
+body{
+    background-color: black;
+}
+
+h1{
+    color: white;
+    text-align: center;
+    border: 2px solid rgb(187, 0, 255);
+}
+
+h1, p{
+    padding: 20px;
+}
+
+p{
+    color: rgb(105, 0, 0);
+    font-family: Verdana;
+    font-size: 20px;
+}
+
+div{
+    color: blue;
+    font-size: 40px;
+}
+
+#div2{
+    color: red;
+}
+
+.cdiv{
+    color: green;
+    border: 2px solid white;
+
+}
+
+.pa{
+    color: aqua;
+}
+
+p.pa{
+    font-size: 35px;
+}
+
+.estilo1{
+    color: orangered;
+}
+
+.estilo2{
+    color: gray;
+    font-size: 90px;
+}
+
+.estilo3{
+    border: 2px solid red;
+}
