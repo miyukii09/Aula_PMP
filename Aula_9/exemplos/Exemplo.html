@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="alert('mensagem de teste');alert('Outra')">ola</button>
+    <button onclick="document.getElementById('demo').innerHTML='<b>TESTO</b>'">HTML</button>
+    <button onclick="document.getElementById('esconde').style.display='none'">SUMA</button>
+    <button onclick="document.getElementById('esconde').style.display='block'">APARECA</button>
+
+    <p id="demo">veja</p>
+    <h1 id="esconde">vai desaparecer? ou nao?</h1>
+    <h2 id="exemploJS">FATEC MOCOCA</h2>
+
+    <script>
+        document.getElementById('exemploJS').innerHTML="FATEC RIBEORÃO";
+    </script>
+</body>
+</html>

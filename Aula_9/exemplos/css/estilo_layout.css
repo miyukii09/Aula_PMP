@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.banner{
+    background-color: #0073e5;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.menu{
+    background-color: #005bb5;
+    padding: 10px 0;
+}
+.menu ul{
+    list-style: none;
+    text-align: center;
+}
+.menu ul li{
+    display: inline;
+    margin: 0 15px;
+}
+.menu ul li a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px
+}
+.menu ul li a:hover{
+    color: #222;
+}
+.conteudo{
+    padding: 20px;
+    text-align: center;
+}
+.rodape{
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
