@@ -1,13 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Seleção de Produtos</title>
+    <style>
+        .produto {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Escolha seu produto</h1>
-    <button onclick="">Camiseta</button>
+
+    <h1>Escolha um produto</h1>
+    <div class="container">
+        <!-- Botões para selecionar o produto -->
+        <button onclick="mostrarProduto('camiseta')">Mostrar Camiseta</button>
+        <button onclick="mostrarProduto('bermuda')">Mostrar Bermuda</button>
+    </div>
+
+    <!-- Produtos, inicialmente escondidos -->
+    <div id="camiseta" class="produto">
+        <h2>Camiseta</h2>
+        <p>Uma camiseta confortável e estilosa para o seu dia a dia.</p>
+    </div>
+
+    <div id="bermuda" class="produto">
+        <h2>Bermuda</h2>
+        <p>Uma bermuda prática e confortável para os dias quentes.</p>
+    </div>
+
+    <script>
+        // Função que mostra o produto selecionado
+        function mostrarProduto(produto) {
+            // Esconde todos os produtos
+            document.getElementById('camiseta').style.display = 'none';
+            document.getElementById('bermuda').style.display = 'none';
+            
+            // Exibe o produto selecionado
+            document.getElementById(produto).style.display = 'block';
+        }
+    </script>
+
 </body>
 </html>
