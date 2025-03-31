@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function escreverMensagem(){
+            document.getElementById('p1').innerHTML = "Olá Fatec. Nossa aula Online";
+        }
+        function ocultar(){
+            document.getElementById('p1').style.display='none';
+        }
+        function mostar(){
+            document.getElementById('p1').style.display='block';
+        }
+    </script>
+</head>
+<body>
+    <h1>atividade</h1>
+    <button onclick="escreverMensagem()">escrever</button>
+    <button onclick="ocultar()">ocultar</button>
+    <button onclick="mostar()">mostar</button>
+
+    <p id="p1"></p>
+</body>
+</html>

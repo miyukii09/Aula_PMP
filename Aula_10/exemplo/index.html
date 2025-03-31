@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function inserirAlgoritimoHtml(Escolha){
+            let elemento = document.getElementById('func01');
+            if (Escolha == 'b1'){
+                elemento.innerHTML = "<div style='color:blue'> Fatec </div> ";
+            }
+            else{
+                elemento.innerHTML = "<div style='color:red'> Fatec Mococa </div> ";
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <h1>Teste com funções</h1>
+    <h2>Botão função 1:</h2>
+    <button onclick="inserirAlgoritimoHtml('b1');">Disparar a função 1</button>
+    <button onclick="inserirAlgoritimoHtml('b2');">Disparar a função 1 do botão 2</button>
+    <p id="func01"></p>
+</body>
+</html>
