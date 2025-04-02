@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function calcular(opcao){
+
+            /* criando variavel para pegar dados do html*/
+            let campo1P1Cov = conv('val01');
+            let campo2P1Cov = conv('val02');
+
+            let campo1P2Cov = conv('val01P2');
+            let campo2P2Cov = conv('val02P2');
+
+            if(opcao=='p1'){
+                alert(campo1P1Cov + 90);
+                alert(campo2P1Cov + 11);
+
+            }
+            else{
+                
+            }
+        }
+
+        function conv(id){
+            return +document.getElementById(id).value;
+        }
+    </script>
+</head>
+<body>
+    <h1>Parte 1 do cálculo</h1>
+    <label for="val01">Digite o valor 1:</label>
+    <input type="text" name="val01" id="val01"><br><br>
+
+    <label for="val02">Digite o valor 2:</label>
+    <input type="text" name="val02" id="val02"><br><br>
+
+    <button onclick="calcular('p1')">Cálculo 1</button><br><br>
+    
+    <h1>Parte 2 do cálculo</h1>
+    <label for="val0p2">Digite o valor 1:</label>
+    <input type="text" name="val01P2" id="val01P2"><br><br>
+
+    <label for="val02P2">Digite o valor 2:</label>
+    <input type="text" name="val02P2" id="val02P2"><br><br>
+
+    <button onclick="calcular('p2')">Cálculo 2</button><br><br>
+</body>
+</html>
