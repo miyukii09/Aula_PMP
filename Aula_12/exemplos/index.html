@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo manipulação de Formulario - RADIOBUTTON</title>
+    <script>
+        function mostrarSelecionado(){
+            const radios    = document.getElementsByName('opTrasp');
+            let selecionado = '';
+
+            for(const radio of radios){
+                if(radio.checked){
+                    selecionado = radio.value;
+                    break;
+                }
+            }
+            document.getElementById('resultado').textContent = `O item selecionado foi: ${selecionado || 'numhum'}`;
+
+        }
+        function selecionarMoto(){
+            const radios = document.getElementsByName('opTrasp')
+            
+            for(const radio of radios){
+            if(radio.value == 'moto'){
+                radio.checked = true;
+                break;
+            }
+        }
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <label>
+            <input type="radio" name="opTrasp" value="bicicleta">
+            Bicicleta
+        </label>
+        <label>
+            <input type="radio" name="opTrasp" value="moto">
+            Motocicleta
+        </label>
+        <label>
+            <input type="radio" name="opTrasp" value="carro">
+            Carro
+        </label>
+        <input type="button" onclick="mostrarSelecionado()" value="Mostar Selecionado"> 
+        <input type="button" onclick="selecionarMoto()" value="Selecionar Moto">
+    </form>
+    <p id="resultado"></p>
+</body>
+</html>
