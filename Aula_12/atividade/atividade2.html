@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Juros por Mês</title>
+    <script>
+        function calcularJuros() {
+            // Obter o valor da fatura
+            let valorFatura = parseFloat(document.getElementById('valorFatura').value);
+
+            // Obter a data de vencimento
+            let dataVencimento = new Date(document.getElementById('datavencimento').value);
+
+            // Obter a data atual
+            let dataAtual = new Date();
+
+            if (!isNaN(valorFatura) && dataVencimento instanceof Date && !isNaN(dataVencimento)) {
+                // Calcular a diferença em meses
+                let diferencaEmMeses =
+                    (dataAtual.getFullYear() - dataVencimento.getFullYear()) * 12 +
+                    (dataAtual.getMonth() - dataVencimento.getMonth());
+
+                let percentualJuros = 0;
+
+                // Ajustar o juros com base nos meses atrasados
+                if (diferencaEmMeses > 0) {
+                    percentualJuros = diferencaEmMeses * 0.05; // 5% por mês de atraso
+                }
+
+                // Limitar juros a 25% no máximo
+                if (percentualJuros > 0.25) { // Máximo de 25%
+                    percentualJuros = 0.25;
+                }
+
+                // Calcular valores
+                let jurosCalculado = valorFatura * percentualJuros;
+                let totalAPagar = valorFatura + jurosCalculado;
+
+                // Exibir os resultados
+                document.getElementById("rJuros").value = jurosCalculado.toFixed(2);
+                document.getElementById("total").value = totalAPagar.toFixed(2);
+
+                // Atualizar exibição dos juros no rádio
+                let radios = document.getElementsByName('juros');
+                for (const radio of radios) {
+                    if (parseFloat(radio.value) === percentualJuros) {
+                        radio.checked = true;
+                    }
+                }
+            } else {
+                alert("Por favor, insira um valor válido e uma data de vencimento.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Calculadora de Juros por Mês</h2>
+    <form>
+        <label for="valorFatura">Valor da fatura</label>
+        <input type="text" id="valorFatura">
+        <br><br>
+
+        <label for="datavencimento">Data do vencimento</label>
+        <input type="date" id="datavencimento">
+        <br><br>
+
+        <label>Selecione o juros:</label>
+        <input type="radio" name="juros" value="0.05"> 5%
+        <input type="radio" name="juros" value="0.10"> 10%
+        <input type="radio" name="juros" value="0.15"> 15%
+        <input type="radio" name="juros" value="0.20"> 20%
+        <input type="radio" name="juros" value="0.25"> 25%
+        <br>
+
+        <button type="button" onclick="calcularJuros()">Calcular</button>
+    </form>
+
+    <label>Valor do juros:</label>
+    <input type="text" id="rJuros" readonly>
+    <br><br>
+
+    <label>Valor a pagar:</label>
+    <input type="text" id="total" readonly>
+</body>
+</html>

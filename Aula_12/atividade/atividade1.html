@@ -1,32 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Calculadora de Juros</title>
+    <style>
+    </style>
     <script>
+        function aplicarJuros() {
+            let radios = document.getElementsByName('juros');
+            let valorJuros = 0;
 
+            for (const radio of radios) {
+                if (radio.checked) {
+                    valorJuros = parseFloat(radio.value);
+                    break;
+                }
+            }
+
+            let valorFatura = parseFloat(document.getElementById('valorFatura').value);
+
+            if (!isNaN(valorFatura) && valorJuros > 0) {
+                let jurosCalculado = valorFatura * valorJuros;
+                let totalAPagar = valorFatura + jurosCalculado;
+
+                document.getElementById("rJuros").value = jurosCalculado.toFixed(2);
+                document.getElementById("total").value = totalAPagar.toFixed(2);
+            } else {
+                alert("Por favor, insira um valor válido para a fatura e selecione um juros.");
+            }
+        }
     </script>
 </head>
 <body>
+    <h2>Calculadora de Juros</h2>
     <form>
-        <label>Valor da fatura</label>
-        <input type="text" name="valorFatura">
-        <br>
-        <br>
+        <label for="valorFatura">Valor da fatura</label>
+        <input type="text" id="valorFatura">
+        <br><br>
 
-        <input type="radio" name="juros" value="5p" onclick="aplivarJutos()"> 5% <br>
-        <input type="radio" name="juros" value="10p" onclick="aplivarJutos()"> 10% <br>
-        <input type="radio" name="juros" value="15p" onclick="aplivarJutos()"> 15% <br>
-        <input type="radio" name="juros" value="20p" onclick="aplivarJutos()"> 20% <br>
-        <input type="radio" name="juros" value="25p" onclick="aplivarJutos()"> 25% <br>
+        <label>Selecione o juros:</label>
+        <input type="radio" name="juros" value="0.05" onclick="aplicarJuros()"> 5%
+        <input type="radio" name="juros" value="0.10" onclick="aplicarJuros()"> 10%
+        <input type="radio" name="juros" value="0.15" onclick="aplicarJuros()"> 15%
+        <input type="radio" name="juros" value="0.20" onclick="aplicarJuros()"> 20%
+        <input type="radio" name="juros" value="0.25" onclick="aplicarJuros()"> 25%
     </form>
     <br>
-    Valor do juros: 
-    <input type="text" name="rJuros" id="rJuros">
+
+    <label>Valor do juros:</label>
+    <input type="text" id="rJuros" readonly>
     <br><br>
-    Valor a pagar: 
-    <input type="text" name="total" id="total">
+
+    <label>Valor a pagar:</label>
+    <input type="text" id="total" readonly>
 </body>
 </html>
