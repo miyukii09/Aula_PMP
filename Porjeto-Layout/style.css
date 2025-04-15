@@ -1,34 +1,103 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
-    padding: 20px;
-  }
-  
-  .container {
-    max-width: 500px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  input, button {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    font-size: 1em;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    background: #eee;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #f0f0f0;
+  padding: 20px;
+  margin: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+input, select, button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+}
+
+input, select {
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+button {
+  background-color: #00aaff;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #0077cc;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #2a2a2a;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-excluir {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-excluir:hover {
+  background-color: #cc0000;
+}
+
+.link-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #4444ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.link-btn:hover {
+  background-color: #3333cc;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-editar {
+  background-color: #ffaa00;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-editar:hover {
+  background-color: #cc8800;
+}
