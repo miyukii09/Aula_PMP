@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Usuaios</h1>
+    <button onclick="buscarUsuarios()">Buscar</button>
+    <ul id="lista"></ul>
+
+    <script>
+        function buscarUsuarios(){
+            fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById('lista');
+                lista.innerHTML = '';
+                data.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = `Nome: ${user.name} - Endereço: ${user.address.street}, ${user.address.suite}, ${user.address.city}`;
+                    lista.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Erro', error));
+        }
+    </script>
+</body>
+</html>
