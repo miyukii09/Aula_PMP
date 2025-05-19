@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Lista de usuários</title>
+</head>
+<body>
+    <div class="container">
+    <h1>Lista de usuários</h1>
+    <ul id="lista"></ul>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById('lista');
+                lista.innerHTML = '';
+                data.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = `Nome: ${user.name} - E-mail: ${user.email}`;
+                    lista.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Erro', error));
+    </script>
+
+    <a class="link-btn" href="consulta.html">Ir para a consulta de jogos cadastrados</a>
+    <a class="link-btn" href="index.html">Voltar para o cadastro de jogos</a>
+    </div>
+
+</body>
+</html>
