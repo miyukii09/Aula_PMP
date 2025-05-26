@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso via POST API Publica</title>
+</head>
+<body>
+    <h2>Formulario de contato</h2>
+    <form id="meuFormulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <button type="submit">Enviar</button>
+        <br>
+        <h1 id="resposta"></h1>
+    </form>
+</body>
+<script>
+    document.getElementById("meuFormulario").addEventListener("submit",function(e){
+        e.preventDefault();
+        const nome  = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+
+        fetch("https://jsonplaceholder.typicode.com/posts",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({nome,email})
+        })
+        .then(response=>response.json())
+        .then(data=>{
+            document.getElementById("resposta").innerText="Enviado com Sucessi! ID: " + data.id;
+        })
+        .catch(error =>{
+            document.getElementById("resposta").innerText="Ocorreu um erro" + error;
+        });
+    })
+</script>
+</html>
