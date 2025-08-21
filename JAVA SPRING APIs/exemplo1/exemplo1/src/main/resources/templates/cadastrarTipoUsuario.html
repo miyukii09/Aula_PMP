@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}" />
+    <script  th:src="@{/js/formTipoUsuario.js}"></script>
+</head>
+<body>
+
+<!-- Fragmentos Thymeleaf -->
+<div th:replace="/banner :: banner"></div>
+<div th:replace="/menu :: menu"></div>
+
+<main class="conteudo">
+    <form id="tipoUsuarioForm">
+        <input type="text" name="tipo" placeholder="Tipo" required />
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div id="mensagem" style="margin-top: 10px; font-weight: bold;"></div>
+</main>
+
+
+<div th:replace="/footer :: footer"></div>
+
+</body>
+</html>

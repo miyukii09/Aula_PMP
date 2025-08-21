@@ -47,4 +47,8 @@ public class TipoCarros {
     public void setCarros(List<Carros> carros) {
         this.carros = carros;
     }
+
+    public String getTipo() {
+        return null;
+    }
 }

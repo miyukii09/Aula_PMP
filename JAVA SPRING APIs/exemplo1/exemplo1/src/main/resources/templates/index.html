@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<!-- Inserindo o fragmento banner -->
+<div th:replace="/banner :: banner"></div>
+<div th:replace="/menu :: menu"></div>
+<main class="conteudo">
+    <h1>Bem Vindo ao Site</h1>
+    <p>Este é um exemplo de LAYOUT</p>
+</main>
+<div th:replace="/footer :: footer"></div>
+
+</body>
+</html>
+

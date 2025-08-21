@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="648ac6a9-c06d-4fac-a9e7-2507ba3a5546" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/hibernate/orm/hibernate-core/6.6.13.Final/hibernate-core-6.6.13.Final.jar!/org/hibernate/exception/JDBCConnectionException.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/6.2.6/spring-beans-6.2.6.jar!/org/springframework/beans/factory/BeanCreationException.class" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2xCJPJb8wcTJP9kqOA1az6DM2F4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Exemplo1Application.executor": "Run",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JUnit.UsuarioControllerTest.executor": "Run",
+    "JUnit.UsuarioControllerTest.testListarTodosUsuarios.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "G:/Meu Drive/PESSOAL_ATUAL/FATEC 2025 1SEMESTRE/Programação Multiplataforma/JAVA SPRING APIs",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.fatec.exemplo1.repository" />
+      <recent name="com.fatec.exemplo1.model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Meu Drive\PESSOAL_ATUAL\FATEC 2025 1SEMESTRE\Programação Multiplataforma\JAVA SPRING APIs\exemplo1\exemplo1\src\main\resources\static\css" />
+      <recent name="G:\Meu Drive\PESSOAL_ATUAL\FATEC 2025 1SEMESTRE\Programação Multiplataforma\JAVA SPRING APIs\exemplo1\exemplo1\src\main\resources\static" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Exemplo1Application">
+    <configuration name="Exemplo1Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.fatec.exemplo1.Exemplo1Application" />
+      <module name="exemplo1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fatec.exemplo1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsuarioControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exemplo1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fatec.exemplo1.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fatec.exemplo1.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.fatec.exemplo1.controller.UsuarioControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsuarioControllerTest.testListarTodosUsuarios" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exemplo1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fatec.exemplo1.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fatec.exemplo1.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.fatec.exemplo1.controller.UsuarioControllerTest" />
+      <option name="METHOD_NAME" value="testListarTodosUsuarios" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Exemplo1Application" />
+        <item itemvalue="JUnit.UsuarioControllerTest" />
+        <item itemvalue="JUnit.UsuarioControllerTest.testListarTodosUsuarios" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="648ac6a9-c06d-4fac-a9e7-2507ba3a5546" name="Changes" comment="" />
+      <created>1747436096302</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747436096302</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/exemplo1$Exemplo1Application.ic" NAME="Exemplo1Application Coverage Results" MODIFIED="1747920335929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.fatec.exemplo1.*</FILTER>
+    </SUITE>
+  </component>
+</project>

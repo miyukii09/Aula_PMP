@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Simples com IA (Gemini)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #chat-container { max-width: 600px; margin: 0 auto; border: 1px solid #ccc; padding: 10px; border-radius: 5px; }
+        #messages { height: 300px; overflow-y: scroll; border: 1px solid #eee; padding: 10px; margin-bottom: 10px; }
+        .message { margin-bottom: 5px; }
+        .user-message { text-align: right; color: blue; }
+        .ai-message { text-align: left; color: green; }
+        input[type="text"] { width: calc(100% - 70px); padding: 8px; border: 1px solid #ccc; border-radius: 3px; }
+        button { width: 60px; padding: 8px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+    </style>
+</head>
+<body>
+<div id="chat-container">
+    <h1>Chatbot de Demonstração</h1>
+    <div id="messages"></div>
+    <input type="text" id="user-input" placeholder="Digite sua mensagem...">
+    <button onclick="sendMessage()">Enviar</button>
+</div>
+
+<script>
+    async function sendMessage() {
+        const userInput = document.getElementById('user-input');
+        const messagesDiv = document.getElementById('messages');
+        const message = userInput.value.trim();
+
+        if (!message) return;
+
+        // Adiciona a mensagem do usuário
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.classList.add('message', 'user-message');
+        userMessageDiv.textContent = 'Você: ' + message;
+        messagesDiv.appendChild(userMessageDiv);
+
+        userInput.value = ''; // Limpa o input
+
+        // Faz a requisição para o backend Spring
+        try {
+            const response = await fetch('/api/chat', { // Atenção ao caminho /api/chat
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain' // O backend espera um corpo simples de texto
+                },
+                body: message // Envia a mensagem como corpo da requisição
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erro HTTP! Status: ${response.status}`);
+            }
+
+            const aiResponse = await response.text(); // O backend retorna uma string simples
+
+            // Adiciona a resposta da IA
+            const aiMessageDiv = document.createElement('div');
+            aiMessageDiv.classList.add('message', 'ai-message');
+            aiMessageDiv.textContent = 'IA: ' + aiResponse;
+            messagesDiv.appendChild(aiMessageDiv);
+
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Rola para o final
+        } catch (error) {
+            console.error('Erro ao enviar mensagem:', error);
+            const errorMessageDiv = document.createElement('div');
+            errorMessageDiv.classList.add('message', 'ai-message');
+            errorMessageDiv.textContent = 'IA: Desculpe, não consegui me comunicar. ' + error.message;
+            messagesDiv.appendChild(errorMessageDiv);
+        }
+    }
+
+    // Enviar mensagem ao pressionar Enter
+    document.getElementById('user-input').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
+</script>
+</body>
+</html>
