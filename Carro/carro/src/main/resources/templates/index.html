@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Carros - FATEC Mococa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .banner {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .menu {
+            background-color: #005bb5;
+            padding: 10px;
+        }
+        .menu ul {
+            list-style: none;
+            text-align: center;
+        }
+        .menu ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .menu ul li a:hover {
+            text-decoration: underline;
+        }
+        .conteudo {
+            padding: 20px;
+            text-align: center;
+        }
+        .rodape {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+            max-width: 400px;
+            margin: 0 auto 20px;
+        }
+        input, select, button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 16px;
+        }
+        button {
+            background-color: #005bb5;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004494;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .actions button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .edit-btn {
+            background-color: #f39c12;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+        .save-btn {
+            background-color: #27ae60;
+            display: none;
+        }
+        #mensagem {
+            margin: 10px auto;
+            padding: 10px;
+            max-width: 400px;
+            text-align: center;
+            display: none;
+        }
+        #chatOutput {
+            max-width: 400px;
+            margin: 0 auto 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<!-- Banner -->
+<div class="banner">Menu Banner</div>
+
+<!-- Menu -->
+<div class="menu">
+    <ul>
+        <li><a href="#" onclick="showSection('home')">Home</a></li>
+        <li><a href="#" onclick="showSection('cadastrarCarros')">Cadastro Carro</a></li>
+        <li><a href="#" onclick="showSection('cadastrarTipoCarro')">Cadastro Tipo Carro</a></li>
+        <li><a href="#" onclick="showSection('contato')">Contato</a></li>
+        <li><a href="#" onclick="showSection('chatbot')">Chatbot</a></li>
+    </ul>
+</div>
+
+<!-- Conteúdo -->
+<div class="conteudo">
+    <!-- Home -->
+    <div id="home">
+        <h1>Bem Vindo ao Site</h1>
+        <p>Este é um exemplo de LAYOUT</p>
+    </div>
+
+    
+
+    <!-- Cadastro de Carro -->
+    <div id="cadastrarCarros" style="display: none;">
+        <h2>Cadastro de Carro</h2>
+        <form id="carroForm">
+            <input type="text" id="placa" name="placa" placeholder="Placa" required>
+            <input type="text" id="marca" name="marca" placeholder="Marca" required>
+            <input type="text" id="modelo" name="modelo" placeholder="Modelo" required>
+            <input type="number" id="ano" name="ano" placeholder="Ano" required>
+            <input type="text" id="cor" name="cor" placeholder="Cor" required>
+            <input type="number" id="kmRodados" name="kmRodados" placeholder="KM Rodados" step="0.01" required>
+            <input type="number" id="valorDiaria" name="valorDiaria" placeholder="Valor Diária" step="0.01" required>
+            <select id="disponivel" name="disponivel" required>
+                <option value="">Disponível?</option>
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
+            </select>
+            <select id="tipoId" name="tipoCarros" required>
+                <option value="">Selecione o tipo</option>
+            </select>
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="mensagem"></div>
+        <table id="carrosTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Placa</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Cor</th>
+                <th>KM Rodados</th>
+                <th>Valor Diária</th>
+                <th>Disponível</th>
+                <th>Tipo</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Contato -->
+    <div id="contato" style="display: none;">
+        <h2>Contato</h2>
+        <p>Entre em contato conosco!</p>
+    </div>
+
+    <!-- Chatbot -->
+    <div id="chatbot" style="display: none;">
+        <h2>Chatbot de Demonstração</h2>
+        <div id="chatOutput"></div>
+        <form id="chatForm">
+            <input type="text" id="chatInput" placeholder="Digite sua mensagem" required>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="rodape">2025 FATEC Mococa</div>
+
+<script>
+    const API_BASE = 'http://localhost:8080';
+    const mensagem = document.getElementById('mensagem');
+
+    function showSection(sectionId) {
+        document.querySelectorAll('.conteudo > div').forEach(section => {
+            section.style.display = section.id === sectionId ? 'block' : 'none';
+        });
+        mensagem.style.display = 'none';
+        if (sectionId === 'cadastrarTipoCarro') loadTipos();
+        if (sectionId === 'cadastrarCarros') loadCarros();
+    }
+
+    async function loadTipos() {
+        const select = document.getElementById('tipoId');
+        const tableBody = document.querySelector('#tiposTable tbody');
+        try {
+            const response = await fetch(`${API_BASE}/api/tipoCarros`);
+            if (!response.ok) throw new Error('Erro ao carregar tipos.');
+            const tipos = await response.json();
+            select.innerHTML = '<option value="">Selecione o tipo</option>';
+            tableBody.innerHTML = '';
+            tipos.forEach(tipo => {
+                const option = document.createElement('option');
+                option.value = tipo.id;
+                option.textContent = tipo.nome;
+                select.appendChild(option);
+                const row = `<tr><td>${tipo.id}</td><td>${tipo.nome}</td></tr>`;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        } catch (error) {
+            mensagem.textContent = '❌ Erro ao carregar tipos.';
+            mensagem.style.color = 'red';
+            mensagem.style.display = 'block';
+            console.error(error);
+        }
+    }
+
+    async function loadCarros() {
+        const tableBody = document.querySelector('#carrosTable tbody');
+        try {
+            await loadTipos();
+            const response = await fetch(`${API_BASE}/api/carros`);
+            if (!response.ok) throw new Error('Erro ao carregar carros.');
+            const carros = await response.json();
+            tableBody.innerHTML = '';
+            carros.forEach(carro => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${carro.id}</td>
+                    <td class="editable">${carro.placa}</td>
+                    <td class="editable">${carro.marca}</td>
+                    <td class="editable">${carro.modelo}</td>
+                    <td class="editable">${carro.ano}</td>
+                    <td class="editable">${carro.cor}</td>
+                    <td class="editable">${carro.kmRodados}</td>
+                    <td class="editable">${carro.valorDiaria}</td>
+                    <td class="editable">${carro.disponivel ? 'Sim' : 'Não'}</td>
+                    <td>${carro.tipoCarros ? carro.tipoCarros.nome : 'N/A'}</td>
+                    <td class="actions">
+                        <button class="edit-btn" onclick="editCarro(this)">Editar</button>
+                        <button class="save-btn" onclick="saveCarro(this, ${carro.id})">Salvar</button>
+                        <button class="delete-btn" onclick="deleteCarro(${carro.id})">Excluir</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } catch (error) {
+            mensagem.textContent = '❌ Erro ao carregar carros.';
+            mensagem.style.color = 'red';
+            mensagem.style.display = 'block';
+            console.error(error);
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('tipoCarroForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const dados = { nome: e.target.tipo.value };
+            try {
+                const response = await fetch(`${API_BASE}/api/tipoCarros`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+                if (!response.ok) throw new Error('Erro ao cadastrar tipo.');
+                await response.json();
+                mensagem.textContent = '✅ Cadastro realizado com sucesso!';
+                mensagem.style.color = 'green';
+                mensagem.style.display = 'block';
+                e.target.reset();
+                loadTipos();
+            } catch (error) {
+                mensagem.textContent = '❌ Erro ao cadastrar tipo.';
+                mensagem.style.color = 'red';
+                mensagem.style.display = 'block';
+                console.error(error);
+            }
+        });
+
+        document.getElementById('carroForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const dados = {
+                placa: e.target.placa.value,
+                marca: e.target.marca.value,
+                modelo: e.target.modelo.value,
+                ano: parseInt(e.target.ano.value),
+                cor: e.target.cor.value,
+                kmRodados: parseFloat(e.target.kmRodados.value),
+                valorDiaria: parseFloat(e.target.valorDiaria.value),
+                disponivel: e.target.disponivel.value === 'true',
+                tipoCarros: { id: parseInt(e.target.tipoCarros.value) }
+            };
+            try {
+                const response = await fetch(`${API_BASE}/api/carros`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+                if (!response.ok) throw new Error('Erro ao cadastrar carro.');
+                await response.json();
+                mensagem.textContent = '✅ Cadastro realizado com sucesso!';
+                mensagem.style.color = 'green';
+                mensagem.style.display = 'block';
+                e.target.reset();
+                loadCarros();
+            } catch (error) {
+                mensagem.textContent = '❌ Erro ao cadastrar carro.';
+                mensagem.style.color = 'red';
+                mensagem.style.display = 'block';
+                console.error(error);
+            }
+        });
+
+        document.getElementById('chatForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('chatInput').value;
+            const chatOutput = document.getElementById('chatOutput');
+            chatOutput.innerHTML += `<p><strong>Você:</strong> ${input}</p>`;
+            chatOutput.innerHTML += `<p><strong>Chatbot:</strong> Desculpe, sou um chatbot de demonstração! Envie sua mensagem para suporte.</p>`;
+            e.target.reset();
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        });
+
+        showSection('home');
+    });
+
+    window.editCarro = function(button) {
+        const row = button.closest('tr');
+        const cells = row.querySelectorAll('.editable');
+        cells.forEach(cell => {
+            const input = document.createElement('input');
+            input.value = cell.textContent;
+            cell.innerHTML = '';
+            cell.appendChild(input);
+        });
+        button.style.display = 'none';
+        row.querySelector('.save-btn').style.display = 'inline';
+    };
+
+    window.saveCarro = async function(button, id) {
+        const row = button.closest('tr');
+        const cells = row.querySelectorAll('.editable');
+        const updatedCarro = {
+            placa: cells[0].querySelector('input').value,
+            marca: cells[1].querySelector('input').value,
+            modelo: cells[2].querySelector('input').value,
+            ano: parseInt(cells[3].querySelector('input').value),
+            cor: cells[4].querySelector('input').value,
+            kmRodados: parseFloat(cells[5].querySelector('input').value),
+            valorDiaria: parseFloat(cells[6].querySelector('input').value),
+            disponivel: cells[7].querySelector('input').value === 'Sim'
+        };
+        try {
+            const response = await fetch(`${API_BASE}/api/carros/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedCarro)
+            });
+            if (!response.ok) throw new Error('Erro ao atualizar carro.');
+            mensagem.textContent = '✅ Carro atualizado com sucesso!';
+            mensagem.style.color = 'green';
+            mensagem.style.display = 'block';
+            loadCarros();
+        } catch (error) {
+            mensagem.textContent = '❌ Erro ao atualizar carro.';
+            mensagem.style.color = 'red';
+            mensagem.style.display = 'block';
+            console.error(error);
+        }
+    };
+
+    window.deleteCarro = async function(id) {
+        if (confirm('Tem certeza que deseja excluir este carro?')) {
+            try {
+                const response = await fetch(`${API_BASE}/api/carros/${id}`, {
+                    method: 'DELETE'
+                });
+                if (!response.ok) throw new Error('Erro ao excluir carro.');
+                mensagem.textContent = '✅ Carro excluído com sucesso!';
+                mensagem.style.color = 'green';
+                mensagem.style.display = 'block';
+                loadCarros();
+            } catch (error) {
+                mensagem.textContent = '❌ Erro ao excluir carro.';
+                mensagem.style.color = 'red';
+                mensagem.style.display = 'block';
+                console.error(error);
+            }
+        }
+    };
+</script>
+</body>
+</html>
