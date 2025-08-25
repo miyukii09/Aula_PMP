@@ -20,6 +20,9 @@ public class CarrosService {
     public Optional<Carros> buscarPorId(long id) {
         return repository.findById(id);
     }
+    public Optional<Carros> buscarPorPlaca(int placa){
+        return repository.findByPlaca(placa);
+    }
     public Carros salvar(Carros carros){
         return repository.save(carros);
     }
