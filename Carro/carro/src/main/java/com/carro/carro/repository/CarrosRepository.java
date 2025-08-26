@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CarrosRepository extends JpaRepository<Carros, Long> {
     
-    Optional<Carros> findByPlaca(int placa);
+    Optional<Carros> findByPlaca(String placa);
 
     //@Query("") terminar isso em casa
 }

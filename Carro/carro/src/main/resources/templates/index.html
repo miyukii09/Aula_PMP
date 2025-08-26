@@ -106,15 +106,12 @@
             text-align: center;
             display: none;
         }
-        #chatOutput {
+        #buscaForm {
             max-width: 400px;
-            margin: 0 auto 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            max-height: 200px;
-            overflow-y: auto;
-            text-align: left;
+            margin: 0 auto;
+        }
+        #buscaResult {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -127,9 +124,8 @@
     <ul>
         <li><a href="#" onclick="showSection('home')">Home</a></li>
         <li><a href="#" onclick="showSection('cadastrarCarros')">Cadastro Carro</a></li>
-        <li><a href="#" onclick="showSection('cadastrarTipoCarro')">Cadastro Tipo Carro</a></li>
+        <li><a href="#" onclick="showSection('buscaPlaca')">Busca por Placa</a></li>
         <li><a href="#" onclick="showSection('contato')">Contato</a></li>
-        <li><a href="#" onclick="showSection('chatbot')">Chatbot</a></li>
     </ul>
 </div>
 
@@ -141,14 +137,24 @@
         <p>Este é um exemplo de LAYOUT</p>
     </div>
 
-
-
     <!-- Cadastro de Carro -->
     <div id="cadastrarCarros" style="display: none;">
         <h2>Cadastro de Carro</h2>
         <form id="carroForm">
             <input type="text" id="placa" name="placa" placeholder="Placa" required>
-            <input type="text" id="marca" name="marca" placeholder="Marca" required>
+            <select id="marca" name="marca" required>
+                <option value="">Selecione a Marca</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Fiat">Fiat</option>
+                <option value="Chevrolet">Chevrolet</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Ford">Ford</option>
+                <option value="Renault">Renault</option>
+                <option value="Honda">Honda</option>
+                <option value="Jeep">Jeep</option>
+                <option value="Nissan">Nissan</option>
+            </select>
             <input type="text" id="modelo" name="modelo" placeholder="Modelo" required>
             <input type="number" id="ano" name="ano" placeholder="Ano" required>
             <input type="text" id="cor" name="cor" placeholder="Cor" required>
@@ -160,7 +166,8 @@
                 <option value="false">Não</option>
             </select>
             <select id="tipoId" name="tipoCarros" required>
-                <option value="">Selecione o tipo</option>
+                <option value="">Selecione o Tipo</option>
+                <!-- Opções serão preenchidas dinamicamente -->
             </select>
             <button type="submit">Enviar</button>
         </form>
@@ -185,20 +192,21 @@
         </table>
     </div>
 
+    <!-- Busca por Placa -->
+    <div id="buscaPlaca" style="display: none;">
+        <h2>Busca por Placa</h2>
+        <form id="buscaForm">
+            <input type="text" id="placaBusca" placeholder="Digite a Placa" required>
+            <button type="submit">Buscar</button>
+        </form>
+        <div id="mensagem"></div>
+        <div id="buscaResult"></div>
+    </div>
+
     <!-- Contato -->
     <div id="contato" style="display: none;">
         <h2>Contato</h2>
         <p>Entre em contato conosco!</p>
-    </div>
-
-    <!-- Chatbot -->
-    <div id="chatbot" style="display: none;">
-        <h2>Chatbot de Demonstração</h2>
-        <div id="chatOutput"></div>
-        <form id="chatForm">
-            <input type="text" id="chatInput" placeholder="Digite sua mensagem" required>
-            <button type="submit">Enviar</button>
-        </form>
     </div>
 </div>
 
@@ -208,49 +216,62 @@
 <script>
     const API_BASE = 'http://localhost:8080';
     const mensagem = document.getElementById('mensagem');
+    const tipoSelect = document.getElementById('tipoId');
 
+    // Mostrar/esconder seções
     function showSection(sectionId) {
         document.querySelectorAll('.conteudo > div').forEach(section => {
             section.style.display = section.id === sectionId ? 'block' : 'none';
         });
-        mensagem.style.display = 'none';
-        if (sectionId === 'cadastrarTipoCarro') loadTipos();
-        if (sectionId === 'cadastrarCarros') loadCarros();
+        mensagem.style.display = 'none'; // Reset mensagem ao mudar seção
+        if (sectionId === 'cadastrarCarros') {
+            loadCarros();
+            loadTipos(); // Carrega tipos ao abrir a seção
+        }
+        if (sectionId === 'buscaPlaca') loadBuscaForm();
     }
 
+    // Funções auxiliares
+    function showMessage(text, type) {
+        mensagem.textContent = text;
+        mensagem.className = type;
+        mensagem.style.display = 'block';
+        setTimeout(() => { mensagem.style.display = 'none'; }, 5000);
+    }
+
+    async function fetchData(url, method = 'GET', body = null) {
+        const options = {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+        };
+        if (body) options.body = JSON.stringify(body);
+        const response = await fetch(`${API_BASE}${url}`, options);
+        if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
+        return response.json();
+    }
+
+    // Carregar Tipos de Carro
     async function loadTipos() {
-        const select = document.getElementById('tipoId');
-        const tableBody = document.querySelector('#tiposTable tbody');
         try {
-            const response = await fetch(`${API_BASE}/api/tipoCarros`);
-            if (!response.ok) throw new Error('Erro ao carregar tipos.');
-            const tipos = await response.json();
-            select.innerHTML = '<option value="">Selecione o tipo</option>';
-            tableBody.innerHTML = '';
+            const tipos = await fetchData('/api/tipoCarros');
+            tipoSelect.innerHTML = '<option value="">Selecione o Tipo</option>';
             tipos.forEach(tipo => {
-                const option = document.createElement('option');
-                option.value = tipo.id;
-                option.textContent = tipo.nome;
-                select.appendChild(option);
-                const row = `<tr><td>${tipo.id}</td><td>${tipo.nome}</td></tr>`;
-                tableBody.insertAdjacentHTML('beforeend', row);
+                const option = `<option value="${tipo.id}">${tipo.nome}</option>`;
+                tipoSelect.insertAdjacentHTML('beforeend', option);
             });
         } catch (error) {
-            mensagem.textContent = '❌ Erro ao carregar tipos.';
-            mensagem.style.color = 'red';
-            mensagem.style.display = 'block';
-            console.error(error);
+            showMessage('❌ Erro ao carregar tipos de carro.', 'red');
         }
     }
 
+    // Gerenciamento de Carros
+    const carroForm = document.getElementById('carroForm');
+    const carrosTableBody = document.querySelector('#carrosTable tbody');
+
     async function loadCarros() {
-        const tableBody = document.querySelector('#carrosTable tbody');
         try {
-            await loadTipos();
-            const response = await fetch(`${API_BASE}/api/carros`);
-            if (!response.ok) throw new Error('Erro ao carregar carros.');
-            const carros = await response.json();
-            tableBody.innerHTML = '';
+            const carros = await fetchData('/api/carros');
+            carrosTableBody.innerHTML = '';
             carros.forEach(carro => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -270,88 +291,38 @@
                         <button class="delete-btn" onclick="deleteCarro(${carro.id})">Excluir</button>
                     </td>
                 `;
-                tableBody.appendChild(row);
+                carrosTableBody.appendChild(row);
             });
         } catch (error) {
-            mensagem.textContent = '❌ Erro ao carregar carros.';
-            mensagem.style.color = 'red';
-            mensagem.style.display = 'block';
-            console.error(error);
+            showMessage('❌ Erro ao carregar carros.', 'red');
         }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('tipoCarroForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const dados = { nome: e.target.tipo.value };
-            try {
-                const response = await fetch(`${API_BASE}/api/tipoCarros`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dados)
-                });
-                if (!response.ok) throw new Error('Erro ao cadastrar tipo.');
-                await response.json();
-                mensagem.textContent = '✅ Cadastro realizado com sucesso!';
-                mensagem.style.color = 'green';
-                mensagem.style.display = 'block';
-                e.target.reset();
-                loadTipos();
-            } catch (error) {
-                mensagem.textContent = '❌ Erro ao cadastrar tipo.';
-                mensagem.style.color = 'red';
-                mensagem.style.display = 'block';
-                console.error(error);
-            }
-        });
-
-        document.getElementById('carroForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const dados = {
-                placa: e.target.placa.value,
-                marca: e.target.marca.value,
-                modelo: e.target.modelo.value,
-                ano: parseInt(e.target.ano.value),
-                cor: e.target.cor.value,
-                kmRodados: parseFloat(e.target.kmRodados.value),
-                valorDiaria: parseFloat(e.target.valorDiaria.value),
-                disponivel: e.target.disponivel.value === 'true',
-                tipoCarros: { id: parseInt(e.target.tipoCarros.value) }
-            };
-            try {
-                const response = await fetch(`${API_BASE}/api/carros`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dados)
-                });
-                if (!response.ok) throw new Error('Erro ao cadastrar carro.');
-                await response.json();
-                mensagem.textContent = '✅ Cadastro realizado com sucesso!';
-                mensagem.style.color = 'green';
-                mensagem.style.display = 'block';
-                e.target.reset();
-                loadCarros();
-            } catch (error) {
-                mensagem.textContent = '❌ Erro ao cadastrar carro.';
-                mensagem.style.color = 'red';
-                mensagem.style.display = 'block';
-                console.error(error);
-            }
-        });
-
-        document.getElementById('chatForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const input = document.getElementById('chatInput').value;
-            const chatOutput = document.getElementById('chatOutput');
-            chatOutput.innerHTML += `<p><strong>Você:</strong> ${input}</p>`;
-            chatOutput.innerHTML += `<p><strong>Chatbot:</strong> Desculpe, sou um chatbot de demonstração! Envie sua mensagem para suporte.</p>`;
+    carroForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const dados = {
+            placa: e.target.placa.value,
+            marca: e.target.marca.value,
+            modelo: e.target.modelo.value,
+            ano: parseInt(e.target.ano.value),
+            cor: e.target.cor.value,
+            kmRodados: parseFloat(e.target.kmRodados.value),
+            valorDiaria: parseFloat(e.target.valorDiaria.value),
+            disponivel: e.target.disponivel.value === 'true',
+            tipoCarros: { id: parseInt(e.target.tipoCarros.value) } // Envia o id do tipo
+        };
+        try {
+            await fetchData('/api/carros', 'POST', dados);
+            showMessage('✅ Cadastro realizado com sucesso!', 'green');
             e.target.reset();
-            chatOutput.scrollTop = chatOutput.scrollHeight;
-        });
-
-        showSection('home');
+            loadCarros();
+        } catch (error) {
+            showMessage('❌ Erro ao cadastrar carro.', 'red');
+            console.error(error); // Para depuração
+        }
     });
 
+    // Funções para editar e excluir
     window.editCarro = function(button) {
         const row = button.closest('tr');
         const cells = row.querySelectorAll('.editable');
@@ -362,7 +333,7 @@
             cell.appendChild(input);
         });
         button.style.display = 'none';
-        row.querySelector('.save-btn').style.display = 'inline';
+        row.querySelector('.save-btn').style.display = 'inline-block';
     };
 
     window.saveCarro = async function(button, id) {
@@ -376,46 +347,67 @@
             cor: cells[4].querySelector('input').value,
             kmRodados: parseFloat(cells[5].querySelector('input').value),
             valorDiaria: parseFloat(cells[6].querySelector('input').value),
-            disponivel: cells[7].querySelector('input').value === 'Sim'
+            disponivel: cells[7].querySelector('input').value === 'Sim',
+            tipoCarros: { id: row.cells[9].textContent } // Ajuste para id do tipo, se aplicável
         };
         try {
-            const response = await fetch(`${API_BASE}/api/carros/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedCarro)
-            });
-            if (!response.ok) throw new Error('Erro ao atualizar carro.');
-            mensagem.textContent = '✅ Carro atualizado com sucesso!';
-            mensagem.style.color = 'green';
-            mensagem.style.display = 'block';
+            await fetchData(`/api/carros/${id}`, 'PUT', updatedCarro);
+            showMessage('✅ Carro atualizado com sucesso!', 'green');
             loadCarros();
         } catch (error) {
-            mensagem.textContent = '❌ Erro ao atualizar carro.';
-            mensagem.style.color = 'red';
-            mensagem.style.display = 'block';
-            console.error(error);
+            showMessage('❌ Erro ao atualizar carro.', 'red');
         }
     };
 
     window.deleteCarro = async function(id) {
         if (confirm('Tem certeza que deseja excluir este carro?')) {
             try {
-                const response = await fetch(`${API_BASE}/api/carros/${id}`, {
-                    method: 'DELETE'
-                });
-                if (!response.ok) throw new Error('Erro ao excluir carro.');
-                mensagem.textContent = '✅ Carro excluído com sucesso!';
-                mensagem.style.color = 'green';
-                mensagem.style.display = 'block';
+                await fetchData(`/api/carros/${id}`, 'DELETE');
+                showMessage('✅ Carro excluído com sucesso!', 'green');
                 loadCarros();
             } catch (error) {
-                mensagem.textContent = '❌ Erro ao excluir carro.';
-                mensagem.style.color = 'red';
-                mensagem.style.display = 'block';
-                console.error(error);
+                showMessage('❌ Erro ao excluir carro.', 'red');
             }
         }
     };
+
+    // Busca por Placa
+    const buscaForm = document.getElementById('buscaForm');
+    const buscaResult = document.getElementById('buscaResult');
+
+    function loadBuscaForm() {
+        buscaResult.innerHTML = '';
+    }
+
+    buscaForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const placa = document.getElementById('placaBusca').value;
+        try {
+            const carro = await fetchData(`/api/carros/placa/${placa}`);
+            buscaResult.innerHTML = `
+                <h3>Resultado da Busca</h3>
+                <p>ID: ${carro.id}</p>
+                <p>Placa: ${carro.placa}</p>
+                <p>Marca: ${carro.marca}</p>
+                <p>Modelo: ${carro.modelo}</p>
+                <p>Ano: ${carro.ano}</p>
+                <p>Cor: ${carro.cor}</p>
+                <p>KM Rodados: ${carro.kmRodados}</p>
+                <p>Valor Diária: ${carro.valorDiaria}</p>
+                <p>Disponível: ${carro.disponivel ? 'Sim' : 'Não'}</p>
+                <p>Tipo: ${carro.tipoCarros ? carro.tipoCarros.nome : 'N/A'}</p>
+            `;
+            showMessage('✅ Carro encontrado!', 'green');
+        } catch (error) {
+            showMessage('❌ Carro não encontrado ou erro na busca.', 'red');
+            buscaResult.innerHTML = '';
+        }
+    });
+
+    // Carregar dados iniciais
+    window.addEventListener('DOMContentLoaded', () => {
+        showSection('home');
+    });
 </script>
 </body>
 </html>
