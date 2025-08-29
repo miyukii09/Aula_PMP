@@ -27,10 +27,19 @@ public class CarrosService {
         repository.deleteById(id);
     }
 
-    public List<Carros> busarPorPlaca(String placa){
+    public List<Carros> buscarPorPlaca(String placa){
         return repository.findByPlaca(placa);
     }
-    public List<Carros> buscarFiatEntre1922(int ano1, int ano2){
-        return repository.fingByAnoBetween(ano1, ano2);
+
+    public List<Carros> buscarPorAnoEntre(int ano1, int ano2) {
+        return repository.findByAnoBetween(ano1, ano2);
+    }
+
+    public List<Carros>buscarPorMarcaAno(String marca, int ano){
+        return repository.findByMarcaAndAno(marca, ano);
+    }
+
+    public List<Carros> buscarFinalPlacaSemAnosTop10Diarias(String placa, List<Integer> anos) {
+        return repository.findTop10ByPlacaEndingWithAndAnoNotInOrderByValorDiariaDesc(placa, anos);
     }
 }

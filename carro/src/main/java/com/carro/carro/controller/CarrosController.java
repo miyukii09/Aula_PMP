@@ -12,13 +12,15 @@ import java.util.List;
 public class CarrosController {
     private final CarrosService service;
 
-    public CarrosController(CarrosService service){
-        this.service = service;
+    @PostMapping
+    public Carros criar(@RequestBody Carros novo) {
+        // garante que o ID venha nulo para gerar automaticamente
+        novo.setId(null);
+        return service.salvar(novo);
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
+    public CarrosController(CarrosService service){
+        this.service = service;
     }
 
     @GetMapping
@@ -54,9 +56,5 @@ public class CarrosController {
                     carrosAtualizado.setId(id);
                     return service.salvar(carrosAtualizado);
                 });
-    }
-    @GetMapping("/{placa}")
-    public Carros buscarPorPlaca(@PathVariable String placa){
-        return service.buscarPorPlaca(placa);
     }
 }

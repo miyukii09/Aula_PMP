@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface CarrosRepository extends JpaRepository<Carros, Long> {
     List<Carros> findByPlaca(String placa);
-    List<Carros> fingByAnoBetween(int ano1, int ano2);
+    List<Carros> findByAnoBetween(int ano1, int ano2);
+    List<Carros> findByMarcaAndAno(String marca, int ano);
+    List<Carros> findTop10ByPlacaEndingWithAndAnoNotInOrderByValorDiariaDesc(String placa, List<Integer> anos);
 }
