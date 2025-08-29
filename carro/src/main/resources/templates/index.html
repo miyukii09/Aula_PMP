@@ -1,406 +1,236 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8" />
-    <title>Sistema de Carros</title>
+    <meta charset="UTF-8">
+    <title>Cadastro de Carros</title>
     <style>
-        :root {
-          --bg: #f6f7fb;
-          --card: #ffffff;
-          --txt: #2a2a2a;
-          --muted: #6b6b6b;
-          --primary: #2563eb;
-          --primary-hover: #1e40af;
-          --border: #e5e7eb;
-        }
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--txt); background: var(--bg); }
-        header { background: #111827; color: #fff; }
-        nav { max-width: 1100px; margin: 0 auto; padding: 12px 16px; display: flex; gap: 8px; }
-        nav a { color: #e5e7eb; text-decoration: none; padding: 8px 12px; border-radius: 6px; }
-        nav a.active, nav a:hover { background: #374151; color: #fff; }
-
-        .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-        h2 { margin: 0 0 12px 0; font-size: 22px; }
-        .grid { display: grid; gap: 12px; }
-        .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        @media (max-width: 800px) {
-          .grid-2, .grid-3 { grid-template-columns: 1fr; }
-          label { width: 100% !important; }
-          input, select { width: 100% !important; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
 
-        .field { display: flex; align-items: center; gap: 10px; }
-        label { width: 140px; color: var(--muted); }
-        input, select {
-          width: 220px; padding: 8px 10px; border: 1px solid var(--border);
-          border-radius: 8px; background: #fff; color: var(--txt);
+        nav {
+            background-color: #333;
+            padding: 10px;
+            margin-bottom: 20px;
         }
 
-        .btn {
-          background: var(--primary); color: #fff; border: none; padding: 10px 14px;
-          border-radius: 8px; cursor: pointer; font-weight: 600;
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
         }
-        .btn:hover { background: var(--primary-hover); }
-        .btn-danger { background: #dc2626; }
-        .btn-danger:hover { background: #991b1b; }
-        .actions { display: flex; gap: 8px; }
 
-        .hidden { display: none; }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
-        th, td { border: 1px solid var(--border); padding: 10px; text-align: left; }
-        th { background: #f3f4f6; font-weight: 700; }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
 
-        .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
-        .muted { color: var(--muted); font-size: 14px; }
+        section {
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
     </style>
 </head>
+
 <body>
-<header>
-    <nav>
-        <a href="#" id="tab-cadastro" class="active" onclick="mostrarTela('cadastro')">Cadastro de Carros</a>
-        <a href="#" id="tab-consulta" onclick="mostrarTela('consulta')">Consulta de Carros</a>
-        <a href="#" id="tab-tipos" onclick="mostrarTela('tipos')">Tipos</a>
-    </nav>
-</header>
+<nav>
+    <ul>
+        <li><a href="#" onclick="mostrarSecao('inicio')">🏠 Início</a></li>
+        <li><a href="#" onclick="mostrarSecao('carro')">🚗 Cadastrar Carro</a></li>
+        <li><a href="#" onclick="mostrarSecao('tipo')">📋 Cadastrar Tipo</a></li>
+        <li><a href="#" onclick="mostrarSecao('listaCarros')">📑 Lista de Carros</a></li>
+    </ul>
+</nav>
 
-<main class="container">
-    <!-- CADASTRO DE CARROS -->
-    <section id="telaCadastro" class="card">
-        <h2>Cadastro de carros</h2>
-        <form id="formCarro" autocomplete="off">
-            <div class="grid grid-3">
-                <div class="field"><label>Placa</label><input type="text" name="placa" required /></div>
-                <div class="field"><label>Marca</label><input type="text" name="marca" required /></div>
-                <div class="field"><label>Modelo</label><input type="text" name="modelo" required /></div>
-                <div class="field"><label>Ano</label><input type="number" name="ano" required /></div>
-                <div class="field"><label>Cor</label><input type="text" name="cor" required /></div>
-                <div class="field"><label>Km rodados</label><input type="number" name="kmRodados" required /></div>
-                <div class="field"><label>Valor diária</label><input type="number" step="0.01" name="valorDiaria" required /></div>
-                <div class="field">
-                    <label>Disponível</label>
-                    <select name="disponivel" required>
-                        <option value="true">Sim</option>
-                        <option value="false">Não</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label>Tipo</label>
-                    <select id="selectTipoCadastro" name="tipoId" required disabled>
-                        <option value="">Carregando...</option>
-                    </select>
-                </div>
-            </div>
-            <div style="margin-top:14px" class="actions">
-                <button type="submit" class="btn">Salvar carro</button>
-                <span class="muted">Após cadastrar um tipo novo, este select atualiza automaticamente.</span>
-            </div>
-        </form>
-    </section>
+<section id="inicio" class="active">
+    <h1>Bem-vindo ao sistema de cadastro</h1>
+    <p>Escolha uma opção no menu acima.</p>
+</section>
 
-    <!-- CONSULTA DE CARROS -->
-    <section id="telaConsulta" class="card hidden">
-        <h2>Consulta de carros</h2>
-        <div class="toolbar">
-            <span class="muted">Filtros:</span>
-            <input type="text" id="filtroMarca" placeholder="Marca" />
-            <input type="text" id="filtroModelo" placeholder="Modelo" />
-            <select id="filtroTipo">
-                <option value="">Todos os tipos</option>
-            </select>
-            <button class="btn" onclick="consultarCarros()">Buscar</button>
-        </div>
-        <div class="muted">Resultados:</div>
-        <table>
-            <thead>
-            <tr>
-                <th>Placa</th><th>Marca</th><th>Modelo</th><th>Ano</th><th>Cor</th>
-                <th>Km</th><th>Valor diária</th><th>Disponível</th><th>Tipo</th>
-            </tr>
-            </thead>
-            <tbody id="tabelaConsulta"></tbody>
-        </table>
-    </section>
+<section id="carro">
+    <h2>Cadastrar Carro</h2>
+    <form id="carroForm">
+        <label>Placa:</label><br>
+        <input type="text" name="placa" required><br><br>
 
-    <!-- GERENCIAR TIPOS -->
-    <section id="telaTipos" class="card hidden">
-        <h2>Tipos de carro</h2>
-        <form id="formTipo" class="grid grid-2" autocomplete="off">
-            <div class="field"><label>Nome do tipo</label><input type="text" name="nome" placeholder="Ex.: SUV, Sedan, Hatch" required /></div>
-            <div class="actions"><button type="submit" class="btn">Cadastrar tipo</button></div>
-        </form>
+        <label>Marca:</label><br>
+        <input type="text" name="marca" required><br><br>
 
-        <div style="margin-top: 14px;">
-            <div class="muted">Tipos cadastrados:</div>
-            <table>
-                <thead><tr><th>ID</th><th>Nome</th><th>Ações</th></tr></thead>
-                <tbody id="tabelaTipos"></tbody>
-            </table>
-        </div>
-    </section>
-</main>
+        <label>Modelo:</label><br>
+        <input type="text" name="modelo" required><br><br>
 
-</body>
-</html>
+        <label>Ano:</label><br>
+        <input type="number" name="ano" required><br><br>
+
+        <label>Cor:</label><br>
+        <input type="text" name="cor"><br><br>
+
+        <label>Km Rodados:</label><br>
+        <input type="number" step="0.1" name="kmRodados"><br><br>
+
+        <label>Valor Diária:</label><br>
+        <input type="number" step="0.01" name="valorDiaria"><br><br>
+
+        <label>Disponível:</label><br>
+        <select name="disponivel">
+            <option value="true">Sim</option>
+            <option value="false">Não</option>
+        </select><br><br>
+
+        <label>Tipo:</label><br>
+        <select id="tipoCarrosSelect" name="tipoCarros"></select><br><br>
+
+        <button type="submit">Salvar Carro</button>
+    </form>
+</section>
+
+<section id="tipo">
+    <h2>Cadastrar Tipo de Carro</h2>
+    <form id="tipoForm">
+        <label>Nome do Tipo:</label><br>
+        <input type="text" name="nome" required><br><br>
+        <label>Descrição:</label><br>
+        <textarea name="descricao"></textarea><br><br>
+        <button type="submit">Salvar Tipo</button>
+    </form>
+</section>
+
+<section id="listaCarros">
+    <h2>Lista de Carros</h2>
+    <table id="carrosTable" border="1">
+        <thead>
+        <tr>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Cor</th>
+            <th>Km Rodados</th>
+            <th>Valor Diária</th>
+            <th>Disponível</th>
+            <th>Tipo</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+
 <script>
-    async function carregarTipos() {
-      try {
-        const tipos = await fetch('/api/tipos').then(r => {
-          if (!r.ok) throw new Error('Erro ao buscar tipos');
-          return r.json();
-        });
+    const API_CARROS = '/api/carros';
+    const API_TIPOS = '/api/tipoCarros';
 
-        tiposCache = Array.isArray(tipos) ? tipos : [];
-
-        // Select no cadastro
-        const selCad = document.getElementById('selectTipoCadastro');
-        selCad.innerHTML = ''; // limpa opções
-        const optCadDefault = document.createElement('option');
-        optCadDefault.value = '';
-        optCadDefault.textContent = tiposCache.length > 0 ? 'Selecione um tipo' : 'Nenhum tipo cadastrado';
-        selCad.appendChild(optCadDefault);
-
-        tiposCache.forEach(t => {
-          const opt = document.createElement('option');
-          opt.value = t.id;
-          opt.textContent = t.nome;
-          selCad.appendChild(opt);
-        });
-
-        selCad.disabled = tiposCache.length === 0; // só desabilita se realmente não houver tipos
-
-        // Select no filtro de consulta
-        const selCon = document.getElementById('filtroTipo');
-        selCon.innerHTML = '<option value="">Todos os tipos</option>';
-        tiposCache.forEach(t => {
-          const opt = document.createElement('option');
-          opt.value = t.id;
-          opt.textContent = t.nome;
-          selCon.appendChild(opt);
-        });
-
-        // Atualiza tabela de tipos
-        renderTabelaTipos();
-
-      } catch (e) {
-        console.error(e);
-        const selCad = document.getElementById('selectTipoCadastro');
-        selCad.innerHTML = '<option value="">Erro ao carregar tipos</option>';
-        selCad.disabled = true;
-      }
+    // troca de abas
+    function mostrarSecao(id) {
+        document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
     }
 
-
-    // Estado simples em memória
-    let tiposCache = [];
-
-    // Utilitários
-    const fetchJSON = async (url, options = {}) => {
-      const resp = await fetch(url, options);
-      if (!resp.ok) {
-        const text = await resp.text().catch(() => '');
-        throw new Error(text || `Erro HTTP ${resp.status}`);
-      }
-      return resp.status === 204 ? null : resp.json();
-    };
-
-    const formatCurrency = (v) => {
-      const n = Number(v);
-      if (!isFinite(n)) return '';
-      return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    };
-
-    // Navegação entre telas
-    function mostrarTela(tela) {
-      document.getElementById('telaCadastro').classList.toggle('hidden', tela !== 'cadastro');
-      document.getElementById('telaConsulta').classList.toggle('hidden', tela !== 'consulta');
-      document.getElementById('telaTipos').classList.toggle('hidden', tela !== 'tipos');
-
-      document.getElementById('tab-cadastro').classList.toggle('active', tela === 'cadastro');
-      document.getElementById('tab-consulta').classList.toggle('active', tela === 'consulta');
-      document.getElementById('tab-tipos').classList.toggle('active', tela === 'tipos');
-
-      // Recarrega selects de tipo ao entrar nas telas que usam
-      if (tela === 'cadastro' || tela === 'consulta' || tela === 'tipos') {
-        carregarTipos().catch(() => {});
-      }
-    }
-
-    // Carregar tipos e atualizar todos os lugares que usam
-    async function carregarTipos() {
-      const tipos = await fetchJSON('/api/tipos');
-      tiposCache = Array.isArray(tipos) ? tipos : [];
-
-      // Cadastro select
-      const selCad = document.getElementById('selectTipoCadastro');
-      selCad.innerHTML = '';
-      const optCadDefault = document.createElement('option');
-      optCadDefault.value = '';
-      optCadDefault.textContent = 'Selecione um tipo';
-      selCad.appendChild(optCadDefault);
-
-      tiposCache.forEach(t => {
-        const opt = document.createElement('option');
-        opt.value = t.id;
-        opt.textContent = t.nome;
-        selCad.appendChild(opt);
-      });
-      selCad.disabled = tiposCache.length === 0;
-
-      // Consulta select
-      const selCon = document.getElementById('filtroTipo');
-      // mantém a primeira opção "Todos os tipos"
-      selCon.innerHTML = '<option value="">Todos os tipos</option>';
-      tiposCache.forEach(t => {
-        const opt = document.createElement('option');
-        opt.value = t.id;
-        opt.textContent = t.nome;
-        selCon.appendChild(opt);
-      });
-
-      // Tabela de tipos
-      renderTabelaTipos();
-    }
-
-    function renderTabelaTipos() {
-      const tbody = document.getElementById('tabelaTipos');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      tiposCache.forEach(t => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${t.id}</td>
-          <td>${t.nome}</td>
-          <td class="actions">
-            <button class="btn btn-danger" onclick="excluirTipo(${t.id})">Excluir</button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-      if (tiposCache.length === 0) {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td colspan="3" class="muted">Nenhum tipo cadastrado.</td>`;
-        tbody.appendChild(tr);
-      }
-    }
-
-    // Cadastro de carro
-    document.getElementById('formCarro').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const dados = Object.fromEntries(new FormData(e.target).entries());
-      if (!dados.tipoId) {
-        alert('Selecione um tipo.');
-        return;
-      }
-      const payload = {
-        placa: dados.placa,
-        marca: dados.marca,
-        modelo: dados.modelo,
-        ano: Number(dados.ano),
-        cor: dados.cor,
-        kmRodados: Number(dados.kmRodados),
-        valorDiaria: Number(dados.valorDiaria),
-        disponivel: dados.disponivel === 'true',
-        tipoCarros: { id: Number(dados.tipoId) }
-      };
-      try {
-        await fetchJSON('/api/carros', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        alert('Carro salvo com sucesso!');
-        e.target.reset();
-        // Mantém o tipo selecionado em branco
-        document.getElementById('selectTipoCadastro').value = '';
-      } catch (err) {
-        alert(`Erro ao salvar carro: ${err.message}`);
-      }
-    });
-
-    // Consulta de carros
-    async function consultarCarros() {
-      const marca = document.getElementById('filtroMarca').value.trim();
-      const modelo = document.getElementById('filtroModelo').value.trim();
-      const tipoId = document.getElementById('filtroTipo').value;
-
-      const params = new URLSearchParams();
-      if (marca) params.append('marca', marca);
-      if (modelo) params.append('modelo', modelo);
-      if (tipoId) params.append('tipoId', tipoId);
-
-      const url = '/api/carros' + (params.toString() ? `?${params.toString()}` : '');
-      try {
-        const carros = await fetchJSON(url);
-        const tbody = document.getElementById('tabelaConsulta');
-        tbody.innerHTML = '';
-        (Array.isArray(carros) ? carros : []).forEach(c => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${c.placa ?? ''}</td>
-            <td>${c.marca ?? ''}</td>
-            <td>${c.modelo ?? ''}</td>
-            <td>${c.ano ?? ''}</td>
-            <td>${c.cor ?? ''}</td>
-            <td>${c.kmRodados ?? ''}</td>
-            <td>${formatCurrency(c.valorDiaria)}</td>
-            <td>${c.disponivel ? 'Sim' : 'Não'}</td>
-            <td>${c.tipoCarros?.nome ?? ''}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-        if (!carros || carros.length === 0) {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td colspan="9" class="muted">Nenhum carro encontrado para os filtros informados.</td>`;
-          tbody.appendChild(tr);
+    document.addEventListener('DOMContentLoaded', () => {
+        // carregar lista de carros
+        if (document.getElementById('carrosTable')) {
+            fetch(API_CARROS)
+                .then(res => res.json())
+                .then(data => {
+                    const tbody = document.querySelector('#carrosTable tbody');
+                    tbody.innerHTML = "";
+                    data.forEach(carro => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+        <td>${carro.placa}</td>
+        <td>${carro.marca}</td>
+        <td>${carro.modelo}</td>
+        <td>${carro.ano}</td>
+        <td>${carro.cor}</td>
+        <td>${carro.kmRodados}</td>
+        <td>R$ ${carro.valorDiaria?.toFixed(2) || 0}</td>
+        <td>${carro.disponivel ? 'Sim' : 'Não'}</td>
+        <td>${carro.tipoCarros?.nome || 'N/A'}</td>
+      `;
+                        tbody.appendChild(row);
+                    });
+                });
         }
-      } catch (err) {
-        alert(`Erro na consulta: ${err.message}`);
-      }
-    }
 
-    // Tipos: cadastrar e excluir
-    document.getElementById('formTipo').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const { nome } = Object.fromEntries(new FormData(e.target).entries());
-      try {
-        await fetchJSON('/api/tipos', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nome })
-        });
-        e.target.reset();
-        await carregarTipos(); // atualiza selects e tabela
-        alert('Tipo cadastrado com sucesso!');
-      } catch (err) {
-        alert(`Erro ao cadastrar tipo: ${err.message}`);
-      }
+        // carregar opções de tipoCarros no select
+        if (document.getElementById('carroForm')) {
+            const tipoSelect = document.getElementById('tipoCarrosSelect');
+            fetch(API_TIPOS)
+                .then(res => res.json())
+                .then(tipos => {
+                    tipoSelect.innerHTML = "";
+                    tipos.forEach(tipo => {
+                        const option = document.createElement('option');
+                        option.value = tipo.id;
+                        option.textContent = tipo.nome;
+                        tipoSelect.appendChild(option);
+                    });
+                });
+
+            // salvar carro
+            document.getElementById('carroForm').addEventListener('submit', e => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const carro = {
+                    placa: formData.get('placa'),
+                    marca: formData.get('marca'),
+                    modelo: formData.get('modelo'),
+                    ano: parseInt(formData.get('ano')),
+                    cor: formData.get('cor'),
+                    kmRodados: parseFloat(formData.get('kmRodados')),
+                    valorDiaria: parseFloat(formData.get('valorDiaria')),
+                    disponivel: formData.get('disponivel') === 'true',
+                    tipoCarros: { id: parseInt(formData.get('tipoCarros')) }
+                };
+
+                fetch(API_CARROS, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(carro)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        alert('Carro cadastrado com sucesso!');
+                        e.target.reset();
+                    });
+            });
+        }
+
+        // salvar tipo de carro
+        if (document.getElementById('tipoForm')) {
+            document.getElementById('tipoForm').addEventListener('submit', e => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const tipo = {
+                    nome: formData.get('nome'),
+                    descricao: formData.get('descricao')
+                };
+
+                fetch(API_TIPOS, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(tipo)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        alert('Tipo cadastrado com sucesso!');
+                        e.target.reset();
+                    });
+            });
+        }
     });
-
-    async function excluirTipo(id) {
-      if (!confirm('Tem certeza que deseja excluir este tipo?')) return;
-      try {
-        await fetchJSON(`/api/tipos/${id}`, { method: 'DELETE' });
-        await carregarTipos(); // atualiza tudo após excluir
-      } catch (err) {
-        alert(`Erro ao excluir tipo: ${err.message}`);
-      }
-    }
-
-    // Inicialização
-    (async function init() {
-      try {
-        await carregarTipos();
-      } catch (err) {
-        // deixa selects desabilitados se falhar
-        document.getElementById('selectTipoCadastro').innerHTML = '<option value="">Erro ao carregar tipos</option>';
-        document.getElementById('selectTipoCadastro').disabled = true;
-      }
-      // Abre a tela de cadastro por padrão
-      mostrarTela('cadastro');
-    })();
 </script>
+</body>
 
+</html>
