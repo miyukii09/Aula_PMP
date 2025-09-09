@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Produtos com Categorias</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome do Produto</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="produto : ${produtos}">
+            <td th:text="${produto.id}"></td>
+            <td th:text="${produto.nome}"></td>
+            <td th:text="${#numbers.formatDecimal(produto.preco, 2, 'COMMA', 2, 'POINT')}"></td>
+            <td th:text="${produto.categoria.nome}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script th:src="@{/js/scripts.js}"></script>
+</body>
+</html>
