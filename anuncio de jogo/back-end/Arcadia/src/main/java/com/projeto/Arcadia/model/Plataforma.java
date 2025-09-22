@@ -12,7 +12,7 @@ public class Plataforma {
     public Plataforma(){}
 
     public Plataforma(long id, String plataforma){
-        this.id = id;
+        this.id         = id;
         this.plataforma = plataforma;
     }
 

@@ -12,7 +12,7 @@ public class TipoJogos {
     public TipoJogos(){}
 
     public TipoJogos(long id,String tipo){
-        this.id = id;
+        this.id   = id;
         this.tipo = tipo;
     }
 
