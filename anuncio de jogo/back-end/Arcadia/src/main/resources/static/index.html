@@ -1,0 +1,45 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Arcadia - Cadastro/Edição</title>
+    <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+<header>
+    <nav class="menu">
+        <h1 class="logo">Arcadia</h1>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="consulta.html">Consulta</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="cadastro">
+        <h2 id="titulo-form">Cadastro de Jogos</h2>
+
+        <form id="form-jogo">
+            <input type="text" id="nome" placeholder="Nome do jogo" required />
+            <input type="text" id="plataforma" placeholder="Plataforma (ex.: PC, PS5)" required />
+            <input type="text" id="genero" placeholder="Gênero (ex.: Ação, Corrida)" required />
+            <button type="submit" class="btn" id="btn-submit">Salvar</button>
+        </form>
+
+        <div id="listaJogos" class="preview-lista">
+            <h3>Prévia: jogos cadastrados</h3>
+            <ul id="jogos"></ul>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Arcadia - Todos os direitos reservados</p>
+</footer>
+
+<script src="script/script.js"></script>
+</body>
+</html>

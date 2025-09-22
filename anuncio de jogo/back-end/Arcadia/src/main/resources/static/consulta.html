@@ -1,0 +1,44 @@
+<!-- consulta.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Arcadia - Consulta</title>
+    <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+<header>
+    <nav class="menu">
+        <h1 class="logo">Arcadia</h1>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="consulta.html">Consulta</a></li>
+            <li><a href="cadastro.html">Cadastro</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="consulta">
+        <h2>Consultar Jogos</h2>
+
+        <div class="filtros">
+            <input type="text" id="filtro-nome" placeholder="Filtrar por nome..." />
+            <select id="filtro-genero">
+                <option value="">Todos os Gêneros</option>
+            </select>
+        </div>
+
+        <ul id="lista-jogos" class="lista-consulta"></ul>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Arcadia - Todos os direitos reservados</p>
+</footer>
+
+<script src="script/consulta.js"></script>
+<!--<script src="script/consulta.js"></script>-->
+</body>
+</html>

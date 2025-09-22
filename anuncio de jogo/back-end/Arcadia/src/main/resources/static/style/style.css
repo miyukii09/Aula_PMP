@@ -1,0 +1,298 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0d0d0d;
+  color: #e0e0e0;
+  line-height: 1.5;
+}
+
+/* Menu */
+header {
+  background-color: #1a1a1a;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu .logo {
+  color: #a64dff;
+  font-size: 1.5rem;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #e0e0e0;
+  transition: color 0.3s;
+}
+
+.menu ul li a:hover {
+  color: #a64dff;
+}
+
+/* Seções principais */
+.anuncios, .consulta, .cadastro {
+  padding: 40px;
+  text-align: center;
+}
+
+.anuncios h2, .consulta h2, .cadastro h2 {
+  margin-bottom: 20px;
+  color: #a64dff;
+}
+
+/* Cards de jogos */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  width: 300px;
+  padding: 15px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  border-color: #a64dff;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.card h3 {
+  margin: 10px 0;
+  color: #fff;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Botões */
+.btn, #btnBuscar {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #a64dff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn:hover, #btnBuscar:hover {
+  background-color: #7a29cc;
+}
+
+/* Inputs e formulário */
+.cadastro form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+.cadastro input, 
+.cadastro textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  background-color: #0d0d0d;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.cadastro textarea {
+  resize: none;
+  height: 100px;
+}
+
+/* Lista de jogos cadastrados */
+#listaJogos {
+  margin-top: 30px;
+  text-align: left;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#listaJogos h3 {
+  color: #a64dff;
+  margin-bottom: 10px;
+}
+
+#jogos li {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#jogos li button {
+  background-color: #ff4d4d;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#jogos li button:hover {
+  background-color: #cc0000;
+}
+
+/* Rodapé */
+footer {
+  background-color: #1a1a1a;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* ===== CONSULTA ===== */
+
+/* Container da seção */
+.consulta {
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Título */
+.consulta h2 {
+  margin-bottom: 25px;
+  color: #a64dff;
+  font-size: 1.8rem;
+}
+
+/* Área de filtros */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.filtros input,
+.filtros select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background-color: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+  min-width: 200px;
+  transition: border 0.3s;
+}
+
+.filtros input:focus,
+.filtros select:focus {
+  border-color: #a64dff;
+  outline: none;
+}
+
+/* Lista de jogos */
+.lista-consulta {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-jogo {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border 0.3s, transform 0.2s;
+}
+
+.item-jogo:hover {
+  border-color: #a64dff;
+  transform: scale(1.01);
+}
+
+.item-jogo span {
+  color: #e0e0e0;
+  font-size: 1rem;
+  text-align: left;
+}
+
+/* Botões de ação */
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.btn-editar {
+  background-color: #a64dff;
+  color: #fff;
+}
+
+.btn-editar:hover {
+  background-color: #7a29cc;
+}
+
+.btn-excluir {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.btn-excluir:hover {
+  background-color: #cc0000;
+}
