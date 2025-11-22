@@ -1,28 +1,40 @@
-// App.js
-import * as React from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import CadastroScreen from './screens/CadastroScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './screens/HomeScreen';
 import ConsultaScreen from './screens/ConsultaScreen';
+import { Ionicons } from '@expo/vector-icons';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-const App = () => {
+export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Cadastro"
+      <Tab.Navigator
         screenOptions={{
+          tabBarActiveTintColor: '#a64dff',
+          tabBarInactiveTintColor: '#888',
+          tabBarStyle: { backgroundColor: '#1a1a1a' },
           headerStyle: { backgroundColor: '#1a1a1a' },
+          headerTitleStyle: { color: '#a64dff' },
           headerTintColor: '#a64dff',
-          headerTitleStyle: { fontSize: 24 },
         }}
       >
-        <Stack.Screen name="Cadastro" component={CadastroScreen} options={{ title: 'Arcadia' }} />
-        <Stack.Screen name="Consulta" component={ConsultaScreen} options={{ title: 'Consulta' }} />
-      </Stack.Navigator>
+        <Tab.Screen
+          name="Início"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ color }) => <Ionicons name="home-outline" size={24} color={color} />,
+          }}
+        />
+        <Tab.Screen
+          name="Consulta"
+          component={ConsultaScreen}
+          options={{
+            tabBarIcon: ({ color }) => <Ionicons name="search-outline" size={24} color={color} />,
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
-};
-
-export default App;
+}
